@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이미지 소개</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #f0f4ff, #e0eaff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeInBody 1.5s ease-in;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 350px;
+      text-align: center;
+      padding: 20px;
+      animation: slideUp 1s ease-out;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 16px;
+      transition: transform 0.5s ease;
+    }
+
+    .card img:hover {
+      transform: scale(1.05);
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 20px 0 10px;
+      color: #333;
+      letter-spacing: 2px;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #666;
+      padding: 0 10px;
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <img src="no.png" alt="NO 이미지" />
+    <div class="title">NO</div>
+    <div class="description">이 이미지는 강력한 거절의 메시지를 담고 있습니다. 감정을 표현하는 데 쓰일 수 있어요.</div>
+  </div>
+
+</body>
+</html>
