@@ -42,7 +42,7 @@
       width: 100%;
       border-radius: 16px;
       transition: transform 0.5s ease;
-      z-index: 1;
+      display: block;
     }
 
     .card img.main-img:hover {
@@ -136,10 +136,12 @@
   </div>
 
   <audio id="audio1" src="no.mp3"></audio>
-  <audio id="audio2" src="song.mp3"></audio>
+  <audio id="audio2" src="song.mp3" loop></audio>
 
   <script>
     let toggled = false;
+    let timeoutId;
+
     function toggleDescription() {
       const desc = document.getElementById('desc');
       const img = document.getElementById('mainImage');
@@ -154,6 +156,13 @@
         fire.style.display = 'block';
         audio1.play();
         audio2.play();
+
+        // 8초 후 no.mp3 멈춤
+        timeoutId = setTimeout(() => {
+          audio1.pause();
+          audio1.currentTime = 0;
+        }, 8000);
+
         toggled = true;
       } else {
         img.src = 'no.jpg';
@@ -162,6 +171,8 @@
         audio2.pause();
         audio1.currentTime = 0;
         audio2.currentTime = 0;
+
+        clearTimeout(timeoutId);
         toggled = false;
       }
     }
