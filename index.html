@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>이미지 소개</title>
+  <title>이미지 카드 소개</title>
   <style>
     body {
       margin: 0;
@@ -14,14 +14,13 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      animation: fadeInBody 1.5s ease-in;
+      animation: fadeIn 1.5s ease-in;
     }
 
     .card {
       background: white;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
       width: 350px;
       text-align: center;
       padding: 20px;
@@ -38,14 +37,14 @@
       position: relative;
     }
 
-    .card img.main-img {
+    .main-img {
       width: 100%;
       border-radius: 16px;
       transition: transform 0.5s ease;
       display: block;
     }
 
-    .card img.main-img:hover {
+    .main-img:hover {
       transform: scale(1.05);
     }
 
@@ -67,14 +66,14 @@
       font-weight: 700;
       margin: 20px 0 10px;
       color: #333;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
     }
 
     .description {
       font-size: 1rem;
-      color: #666;
-      padding: 0 10px;
+      color: #555;
       text-align: left;
+      margin-top: 10px;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.6s ease, opacity 0.6s ease;
@@ -102,20 +101,19 @@
       background-color: #3a56d8;
     }
 
-    @keyframes fadeInBody {
+    @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
     @keyframes slideUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .label {
+      font-weight: 600;
+      color: #333;
     }
   </style>
 </head>
@@ -123,15 +121,15 @@
 
   <div class="card">
     <div class="image-container">
-      <img src="no.jpg" alt="NO 이미지" class="main-img" id="mainImage" />
-      <img src="fire.gif" alt="Fire" class="fire-overlay" id="fireOverlay" />
+      <img src="no.jpg" alt="기본 이미지" class="main-img" id="mainImage" />
+      <img src="fire.gif" alt="불꽃 효과" class="fire-overlay" id="fireOverlay" />
     </div>
     <div class="title">노주원</div>
-    <button onclick="toggleDescription()">설명 보기</button>
+    <button onclick="toggleDescription()" id="toggleBtn">설명 보기</button>
     <div class="description" id="desc">
-      <b>나이</b> 만 14세 <br />
-      <b>특징</b> 게이(본인이 언급), 손가락이 김, 안면 근육이 발달함 <br />
-      <b>별명</b> 라바, 김동현
+      <div><span class="label">나이:</span> 만 14세</div>
+      <div><span class="label">특징:</span> 본인의 언급에 따르면 게이, 손가락이 김, 안면 근육 발달</div>
+      <div><span class="label">별명:</span> 라바, 김동현</div>
     </div>
   </div>
 
@@ -139,7 +137,7 @@
   <audio id="audio2" src="song.mp3" loop></audio>
 
   <script>
-    let toggled = false;
+    let isToggled = false;
     let timeoutId;
 
     function toggleDescription() {
@@ -151,19 +149,18 @@
 
       desc.classList.toggle('show');
 
-      if (!toggled) {
+      if (!isToggled) {
         img.src = 'chat.png';
         fire.style.display = 'block';
         audio1.play();
         audio2.play();
 
-        // 8초 후 no.mp3 중지
         timeoutId = setTimeout(() => {
           audio1.pause();
           audio1.currentTime = 0;
         }, 8000);
 
-        toggled = true;
+        isToggled = true;
       } else {
         img.src = 'no.jpg';
         fire.style.display = 'none';
@@ -173,7 +170,7 @@
         audio2.currentTime = 0;
         clearTimeout(timeoutId);
 
-        toggled = false;
+        isToggled = false;
       }
     }
   </script>
