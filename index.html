@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>노주원</title>
+  <title>이미지 소개</title>
   <style>
     body {
       margin: 0;
@@ -27,39 +27,20 @@
       padding: 20px;
       animation: slideUp 1s ease-out;
       transition: transform 0.3s ease;
-      position: relative;
     }
 
     .card:hover {
       transform: scale(1.03);
     }
 
-    .image-container {
-      position: relative;
-    }
-
-    .card img.main-img {
+    .card img {
       width: 100%;
       border-radius: 16px;
       transition: transform 0.5s ease;
-      display: block;
     }
 
-    .card img.main-img:hover {
+    .card img:hover {
       transform: scale(1.05);
-    }
-
-    .fire-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
-      object-fit: cover;
-      pointer-events: none;
-      display: none;
-      z-index: 2;
     }
 
     .title {
@@ -82,7 +63,7 @@
     }
 
     .description.show {
-      max-height: 200px;
+      max-height: 200px; /* 충분히 큰 값 */
       opacity: 1;
     }
 
@@ -122,10 +103,7 @@
 <body>
 
   <div class="card">
-    <div class="image-container">
-      <img src="no.jpg" alt="NO 이미지" class="main-img" id="mainImage" />
-      <img src="fire.gif" alt="Fire" class="fire-overlay" id="fireOverlay" />
-    </div>
+    <img src="no.jpg" alt="NO 이미지" />
     <div class="title">노주원</div>
     <button onclick="toggleDescription()">설명 보기</button>
     <div class="description" id="desc">
@@ -135,46 +113,10 @@
     </div>
   </div>
 
-  <audio id="audio1" src="no.mp3"></audio>
-  <audio id="audio2" src="song.mp3" loop></audio>
-
   <script>
-    let toggled = false;
-    let timeoutId;
-
     function toggleDescription() {
       const desc = document.getElementById('desc');
-      const img = document.getElementById('mainImage');
-      const fire = document.getElementById('fireOverlay');
-      const audio1 = document.getElementById('audio1');
-      const audio2 = document.getElementById('audio2');
-
       desc.classList.toggle('show');
-
-      if (!toggled) {
-        img.src = 'chat.png';
-        fire.style.display = 'block';
-        audio1.play();
-        audio2.play();
-
-        // 8초 후 no.mp3 중지
-        timeoutId = setTimeout(() => {
-          audio1.pause();
-          audio1.currentTime = 0;
-        }, 8000);
-
-        toggled = true;
-      } else {
-        img.src = 'no.jpg';
-        fire.style.display = 'none';
-        audio1.pause();
-        audio2.pause();
-        audio1.currentTime = 0;
-        audio2.currentTime = 0;
-        clearTimeout(timeoutId);
-
-        toggled = false;
-      }
     }
   </script>
 
