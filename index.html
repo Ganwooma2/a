@@ -40,12 +40,9 @@
 
     .card img.main-img {
       width: 100%;
-      height: auto;
-      min-height: 200px; /* 이미지가 작아도 최소 높이 확보 */
       border-radius: 16px;
       transition: transform 0.5s ease;
-      z-index: 1;
-      object-fit: cover;
+      display: block;
     }
 
     .card img.main-img:hover {
@@ -139,10 +136,12 @@
   </div>
 
   <audio id="audio1" src="no.mp3"></audio>
-  <audio id="audio2" src="song.mp3"></audio>
+  <audio id="audio2" src="song.mp3" loop></audio>
 
   <script>
     let toggled = false;
+    let timeoutId;
+
     function toggleDescription() {
       const desc = document.getElementById('desc');
       const img = document.getElementById('mainImage');
@@ -156,8 +155,14 @@
         img.src = 'chat.png';
         fire.style.display = 'block';
         audio1.play();
-        audio2.loop = false; // 무한 반복 끔
         audio2.play();
+
+        // 8초 후 no.mp3 중지
+        timeoutId = setTimeout(() => {
+          audio1.pause();
+          audio1.currentTime = 0;
+        }, 8000);
+
         toggled = true;
       } else {
         img.src = 'no.jpg';
@@ -166,6 +171,8 @@
         audio2.pause();
         audio1.currentTime = 0;
         audio2.currentTime = 0;
+        clearTimeout(timeoutId);
+
         toggled = false;
       }
     }
