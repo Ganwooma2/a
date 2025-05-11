@@ -125,7 +125,7 @@
       <img src="fire.gif" alt="불꽃 효과" class="fire-overlay" id="fireOverlay" />
     </div>
     <div class="title">노주원</div>
-    <button onclick="toggleDescription()" id="toggleBtn">설명 보기</button>
+    <button onclick="toggleDescription()">설명 보기</button>
     <div class="description" id="desc">
       <div><span class="label">나이:</span> 만 14세</div>
       <div><span class="label">특징:</span> 본인의 언급에 따르면 게이, 손가락이 김, 안면 근육 발달</div>
@@ -134,7 +134,7 @@
   </div>
 
   <audio id="audio1" src="no.mp3"></audio>
-  <audio id="audio2" src="song.mp3" loop></audio>
+  <audio id="audio2" src="song.mp3"></audio> <!-- loop 제거됨 -->
 
   <script>
     let isToggled = false;
@@ -151,8 +151,11 @@
 
       if (!isToggled) {
         img.src = 'chat.png';
+        console.log('이미지 바뀜:', img.src); // 디버깅용
         fire.style.display = 'block';
+
         audio1.play();
+        audio2.loop = false;
         audio2.play();
 
         timeoutId = setTimeout(() => {
@@ -163,7 +166,9 @@
         isToggled = true;
       } else {
         img.src = 'no.jpg';
+        console.log('이미지 복구:', img.src); // 디버깅용
         fire.style.display = 'none';
+
         audio1.pause();
         audio2.pause();
         audio1.currentTime = 0;
